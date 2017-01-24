@@ -13,7 +13,7 @@ function addHash(template, hash) {
 }
 
 function buildDist() {
-  return NODE_ENV == 'prod' ? 'prod' : 'dist'
+  return NODE_ENV == 'prod' ? 'build' : 'dist'
 }
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
   output: {
     path: __dirname + '/' + buildDist(),
     publicPath: "/",
-    filename: addHash("[name].js", 'chunkhash')
+    filename: addHash("[name].js", 'hash')
   },
   
   watch: NODE_ENV == "dev",
@@ -113,7 +113,7 @@ if (NODE_ENV == 'prod') {
     })
   );
   module.exports.plugins.push(
-    new CleanWebpackPlugin(['prod'], {
+    new CleanWebpackPlugin(['build'], {
       verbose: true,
       //exclude: []
     })
